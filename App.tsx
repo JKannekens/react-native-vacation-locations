@@ -1,20 +1,7 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "./screens/HomeScreen";
-import ProfileScreen from "./screens/ProfileScreen";
-import { RootStackParamList } from "./types/navigation/types";
+import MainNavigator from "./src/navigation/MainNavigator";
 
 const App = () => {
-  const RootStack = createNativeStackNavigator<RootStackParamList>();
-
-  return (
-    <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Home">
-        <RootStack.Screen name="Home" component={HomeScreen} />
-        <RootStack.Screen name="Profile" component={ProfileScreen} />
-      </RootStack.Navigator>
-    </NavigationContainer>
-  );
+  return <MainNavigator />;
 };
 
 export default App;
