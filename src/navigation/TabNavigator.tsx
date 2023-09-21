@@ -3,6 +3,9 @@ import HomeScreen from "../screens/HomeScreen";
 import FavoriteScreen from "../screens/FavoriteScreen";
 import SearchScreen from "../screens/SearchScreen";
 import { Ionicons } from "@expo/vector-icons";
+import { Animated, StyleSheet } from "react-native";
+import { colors, sizes } from "../constants/theme";
+import { useRef } from "react";
 
 const Tab = createBottomTabNavigator();
 
@@ -31,32 +34,68 @@ const tabs: Tab[] = [
 ];
 
 const TabNavigator = () => {
+  const offsetAnimation = useRef(new Animated.Value(0)).current;
   return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarShowLabel: false,
-      }}
-    >
-      {tabs.map(({ name, component, icon }) => (
-        <Tab.Screen
-          name={name}
-          component={component}
-          options={{
-            tabBarIcon: ({ focused }) => (
-              <Ionicons
-                name={icon}
-                size={30}
-                style={{
-                  color: focused ? "black" : "gray",
-                }}
-              />
-            ),
-          }}
-        />
-      ))}
-    </Tab.Navigator>
+    <>
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarShowLabel: false,
+        }}
+      >
+        {tabs.map(({ name, component, icon }, index) => (
+          <Tab.Screen
+            key={index}
+            name={name}
+            component={component}
+            options={{
+              tabBarIcon: ({ focused }) => (
+                <Ionicons
+                  name={icon}
+                  size={26}
+                  style={{
+                    color: focused ? colors.primary : colors.gray,
+                  }}
+                />
+              ),
+            }}
+            listeners={{
+              focus: () => {
+                Animated.spring(offsetAnimation, {
+                  toValue: index * (sizes.width / tabs.length),
+                  useNativeDriver: true,
+                }).start();
+              },
+            }}
+          />
+        ))}
+      </Tab.Navigator>
+      <Animated.View
+        style={[
+          styles.tabIndicator,
+          {
+            transform: [
+              {
+                translateX: offsetAnimation,
+              },
+            ],
+          },
+        ]}
+      />
+    </>
   );
 };
+
+const styles = StyleSheet.create({
+  tabIndicator: {
+    position: "absolute",
+    height: 2,
+    width: 10,
+    left: sizes.width / 3 / 2 - 5,
+    bottom: 30,
+    backgroundColor: colors.primary,
+    zIndex: 50,
+  },
+});
 
 export default TabNavigator;
