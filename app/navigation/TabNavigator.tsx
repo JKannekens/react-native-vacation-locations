@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Animated, StyleSheet } from "react-native";
 import { colors, sizes } from "../constants/theme";
 import { useRef } from "react";
+import Icon from "../components/Icon";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,17 +20,17 @@ const tabs: Tab[] = [
   {
     name: "Home",
     component: HomeScreen,
-    icon: "md-home",
+    icon: "md-home-outline",
   },
   {
     name: "Search",
     component: SearchScreen,
-    icon: "md-search",
+    icon: "md-search-outline",
   },
   {
     name: "Favorites",
     component: FavoriteScreen,
-    icon: "md-heart",
+    icon: "md-heart-outline",
   },
 ];
 
@@ -50,9 +51,9 @@ const TabNavigator = () => {
             component={component}
             options={{
               tabBarIcon: ({ focused }) => (
-                <Ionicons
+                <Icon
                   name={icon}
-                  size={26}
+                  size={28}
                   style={{
                     color: focused ? colors.primary : colors.gray,
                   }}

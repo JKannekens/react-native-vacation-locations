@@ -1,4 +1,4 @@
-import MainNavigator from "./src/navigation/MainNavigator";
+import MainNavigator from "./app/navigation/MainNavigator";
 
 const App = () => {
   return <MainNavigator />;
