@@ -10,13 +10,19 @@ type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
 const data = [
   {
+    id: "amalfi",
     title: "Amalfi",
+    image: "https://placehold.co/600x400.jpeg",
   },
   {
+    id: "paris",
     title: "Paris",
+    image: "https://placehold.co/600x400.jpeg",
   },
   {
+    id: "london",
     title: "London",
+    image: "https://placehold.co/600x400.jpeg",
   },
 ];
 
