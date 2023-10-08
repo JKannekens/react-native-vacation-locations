@@ -7,6 +7,7 @@ import { Animated, StyleSheet } from "react-native";
 import { colors, sizes } from "../constants/theme";
 import { useRef } from "react";
 import Icon from "../components/Icon";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,6 +37,7 @@ const tabs: Tab[] = [
 
 const TabNavigator = () => {
   const offsetAnimation = useRef(new Animated.Value(0)).current;
+  const insets = useSafeAreaInsets();
   return (
     <>
       <Tab.Navigator
@@ -75,6 +77,7 @@ const TabNavigator = () => {
         style={[
           styles.tabIndicator,
           {
+            bottom: insets.bottom,
             transform: [
               {
                 translateX: offsetAnimation,
@@ -93,7 +96,6 @@ const styles = StyleSheet.create({
     height: 2,
     width: 10,
     left: sizes.width / 3 / 2 - 5,
-    bottom: 30,
     backgroundColor: colors.primary,
     zIndex: 50,
   },

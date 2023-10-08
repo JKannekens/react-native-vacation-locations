@@ -1,37 +1,22 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { View, Text, StyleSheet } from "react-native";
-import { RootStackParamList } from "../types/navigation/types";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { colors } from "../constants/theme";
 import MainHeader from "../components/MainHeader";
 import ScreenHeader from "../components/ScreenHeader";
 import TopPlacesCarousel from "../components/TopPlacesCarousel";
-
-type Props = NativeStackScreenProps<RootStackParamList, "Home">;
-
-const data = [
-  {
-    id: "amalfi",
-    title: "Amalfi",
-    image: "https://placehold.co/600x400.jpeg",
-  },
-  {
-    id: "paris",
-    title: "Paris",
-    image: "https://placehold.co/600x400.jpeg",
-  },
-  {
-    id: "london",
-    title: "London",
-    image: "https://placehold.co/600x400.jpeg",
-  },
-];
+import SectionHeader from "../components/SectionHeader";
+import TripsList from "../components/TripList";
+import locations from "../data/Locations";
 
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <MainHeader title="Travel App" />
       <ScreenHeader mainTitle="Find your" subTitle="Dream trip" />
-      <TopPlacesCarousel list={data} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <TopPlacesCarousel locations={locations} />
+        <SectionHeader title="Popular Trips" buttonTitle="See All" />
+        <TripsList locations={locations} />
+      </ScrollView>
     </View>
   );
 };

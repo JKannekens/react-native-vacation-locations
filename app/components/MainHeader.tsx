@@ -1,9 +1,8 @@
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import React from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { sizes, spacing } from "../constants/theme";
 import Icon from "./Icon";
-import { Ionicons } from "@expo/vector-icons";
 
 type Props = {
   title: string;
